@@ -2,29 +2,27 @@
 
 ### by [@eyaltoledano](https://x.com/eyaltoledano)
 
-A task management system for AI-driven development with Claude, designed to work seamlessly with Cursor AI.
+A task management system for AI-driven development, designed to work seamlessly with Cursor AI. It now uses OpenRouter to access various AI models.
 
 ## Requirements
 
 - Node.js 14.0.0 or higher
-- Anthropic API key (Claude API)
-- Anthropic SDK version 0.39.0 or higher
-- OpenAI SDK (for Perplexity API integration, optional)
+- OpenRouter API key (Get from [https://openrouter.ai/](https://openrouter.ai/))
+- OpenAI SDK (`openai` package)
 
 ## Configuration
 
 The script can be configured through environment variables in a `.env` file at the root of the project:
 
 ### Required Configuration
-
-- `ANTHROPIC_API_KEY`: Your Anthropic API key for Claude
+- `OPENROUTER_API_KEY`: Your OpenRouter API key
 
 ### Optional Configuration
-
-- `MODEL`: Specify which Claude model to use (default: "claude-3-7-sonnet-20250219")
+- `OPENROUTER_API_BASE`: Base URL for OpenRouter API (default: "https://openrouter.ai/api/v1")
+- `OPENROUTER_MODEL`: Default model to use via OpenRouter (default: "openai/gpt-3.5-turbo")
 - `MAX_TOKENS`: Maximum tokens for model responses (default: 4000)
 - `TEMPERATURE`: Temperature for model responses (default: 0.7)
-- `PERPLEXITY_API_KEY`: Your Perplexity API key for research-backed subtask generation
+- `PERPLEXITY_API_KEY`: Your Perplexity API key for research-backed subtask generation (NOTE: Perplexity integration is currently disabled due to installation issues with its SDK)
 - `PERPLEXITY_MODEL`: Specify which Perplexity model to use (default: "sonar-medium-online")
 - `DEBUG`: Enable debug logging (default: false)
 - `LOG_LEVEL`: Log level - debug, info, warn, error (default: info)
@@ -58,7 +56,7 @@ This will prompt you for project details and set up a new project with the neces
 ### Important Notes
 
 1. This package uses ES modules. Your package.json should include `"type": "module"`.
-2. The Anthropic SDK version should be 0.39.0 or higher.
+2. Ensure you have an `.env` file with at least your `OPENROUTER_API_KEY`.
 
 ## Quick Start with Global Commands
 
@@ -428,8 +426,8 @@ task-master analyze-complexity
 # Save report to a custom location
 task-master analyze-complexity --output=my-report.json
 
-# Use a specific LLM model
-task-master analyze-complexity --model=claude-3-opus-20240229
+# Use a specific LLM model (via OpenRouter)
+task-master analyze-complexity --model=mistralai/mistral-large
 
 # Set a custom complexity threshold (1-10)
 task-master analyze-complexity --threshold=6
@@ -437,8 +435,8 @@ task-master analyze-complexity --threshold=6
 # Use an alternative tasks file
 task-master analyze-complexity --file=custom-tasks.json
 
-# Use Perplexity AI for research-backed complexity analysis
-task-master analyze-complexity --research
+# Use Perplexity AI for research-backed complexity analysis (Currently Disabled)
+# task-master analyze-complexity --research
 ```
 
 ### View Complexity Report

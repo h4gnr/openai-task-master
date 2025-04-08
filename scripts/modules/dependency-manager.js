@@ -3,10 +3,10 @@
  * Manages task dependencies and relationships
  */
 
+import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import boxen from 'boxen';
-import { Anthropic } from '@anthropic-ai/sdk';
 
 import { 
     log, 
@@ -21,12 +21,6 @@ import { displayBanner } from './ui.js';
 
 import { generateTaskFiles } from './task-manager.js';
   
-// Initialize Anthropic client
-const anthropic = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
-
 /**
  * Add a dependency to a task
  * @param {string} tasksPath - Path to the tasks.json file

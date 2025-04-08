@@ -428,16 +428,19 @@ function createProjectStructure(projectName, projectDescription, projectVersion,
       "parse-prd": "node scripts/dev.js parse-prd"
     },
     dependencies: {
-      "@anthropic-ai/sdk": "^0.39.0",
+      "@perplexity/perplexity-sdk": "^0.1.0",
+      "axios": "^1.7.2",
+      "boxen": "^8.0.1",
       "chalk": "^5.3.0",
+      "cli-table3": "^0.6.5",
       "commander": "^11.1.0",
       "dotenv": "^16.3.1",
-      "openai": "^4.86.1",
-      "figlet": "^1.7.0",
-      "boxen": "^7.1.1",
-      "gradient-string": "^2.0.2",
-      "cli-table3": "^0.6.3",
-      "ora": "^7.0.1"
+      "fastmcp": "^1.20.5",
+      "figlet": "^1.8.0",
+      "fuse.js": "^7.0.0",
+      "gradient-string": "^3.0.0",
+      "@inquirer/prompts": "^5.1.2",
+      "openai": "^4.52.7"
     }
   };
   
@@ -561,38 +564,11 @@ function createProjectStructure(projectName, projectDescription, projectVersion,
   
   // Display success message
   console.log(boxen(
-    warmGradient.multiline(figlet.textSync('Success!', { font: 'Standard' })) + 
-    '\n' + chalk.green('Project initialized successfully!'),
-    {
-      padding: 1,
-      margin: 1,
-      borderStyle: 'double',
-      borderColor: 'green'
-    }
-  ));
-  
-  // Display next steps in a nice box
-  console.log(boxen(
-    chalk.cyan.bold('Things you can now do:') + '\n\n' +
-    chalk.white('1. ') + chalk.yellow('Rename .env.example to .env and add your ANTHROPIC_API_KEY and PERPLEXITY_API_KEY') + '\n' +
-    chalk.white('2. ') + chalk.yellow('Discuss your idea with AI, and once ready ask for a PRD using the example_prd.txt file, and save what you get to scripts/PRD.txt') + '\n' +
-    chalk.white('3. ') + chalk.yellow('Ask Cursor Agent to parse your PRD.txt and generate tasks') + '\n' +
-    chalk.white('   └─ ') + chalk.dim('You can also run ') + chalk.cyan('task-master parse-prd <your-prd-file.txt>') + '\n' +
-    chalk.white('4. ') + chalk.yellow('Ask Cursor to analyze the complexity of your tasks') + '\n' +
-    chalk.white('5. ') + chalk.yellow('Ask Cursor which task is next to determine where to start') + '\n' +
-    chalk.white('6. ') + chalk.yellow('Ask Cursor to expand any complex tasks that are too large or complex.') + '\n' +
-    chalk.white('7. ') + chalk.yellow('Ask Cursor to set the status of a task, or multiple tasks. Use the task id from the task lists.') + '\n' +
-    chalk.white('8. ') + chalk.yellow('Ask Cursor to update all tasks from a specific task id based on new learnings or pivots in your project.') + '\n' +
-    chalk.white('9. ') + chalk.green.bold('Ship it!') + '\n\n' +
-    chalk.dim('* Review the README.md file to learn how to use other commands via Cursor Agent.'),
-    {
-      padding: 1,
-      margin: 1,
-      borderStyle: 'round',
-      borderColor: 'yellow',
-      title: 'Getting Started',
-      titleAlignment: 'center'
-    }
+    chalk.white.bold('🚀 Success! Task Master is initialized.') + '\n\n' +
+    chalk.white('1. ') + chalk.yellow('Rename .env.example to .env and add your OPENROUTER_API_KEY and PERPLEXITY_API_KEY') + '\n' +
+    chalk.white('2. ') + chalk.yellow('Run `npm install` to install dependencies') + '\n' +
+    chalk.white('3. ') + chalk.yellow('Run `task-master help` to see available commands'),
+    { padding: 1, borderColor: 'green', borderStyle: 'round' }
   ));
 }
 

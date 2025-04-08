@@ -185,8 +185,11 @@ alwaysApply: true
   - **subtasks**: List of smaller, more specific tasks (Example: `[{"id": 1, "title": "Configure OAuth", ...}]`)
 
 - **Environment Variables Configuration**
-  - **ANTHROPIC_API_KEY** (Required): Your Anthropic API key for Claude (Example: `ANTHROPIC_API_KEY=sk-ant-api03-...`)
-  - **MODEL** (Default: `"claude-3-7-sonnet-20250219"`): Claude model to use (Example: `MODEL=claude-3-opus-20240229`)
+  - **OPENROUTER_API_KEY** (Required): Your OpenRouter API key (Example: `OPENROUTER_API_KEY=sk-or-v1-...`)
+  - **OPENROUTER_API_BASE** (Default: `"https://openrouter.ai/api/v1"`): Base URL for OpenRouter API
+  - **OPENROUTER_MODEL** (Default: `"openai/gpt-3.5-turbo"`): Default OpenRouter model (e.g., `openai/gpt-4o`, `mistralai/mistral-7b-instruct`)
+  - **PERPLEXITY_API_KEY**: For research-backed features (Example: `PERPLEXITY_API_KEY=pplx-...`)
+  - **PERPLEXITY_MODEL** (Default: `"sonar-medium-online"`): Perplexity model (Example: `PERPLEXITY_MODEL=sonar-large-online`)
   - **MAX_TOKENS** (Default: `"4000"`): Maximum tokens for responses (Example: `MAX_TOKENS=8000`)
   - **TEMPERATURE** (Default: `"0.7"`): Temperature for model responses (Example: `TEMPERATURE=0.5`)
   - **DEBUG** (Default: `"false"`): Enable debug logging (Example: `DEBUG=true`)
@@ -195,8 +198,6 @@ alwaysApply: true
   - **DEFAULT_PRIORITY** (Default: `"medium"`): Default priority (Example: `DEFAULT_PRIORITY=high`)
   - **PROJECT_NAME** (Default: `"MCP SaaS MVP"`): Project name in metadata (Example: `PROJECT_NAME=My Awesome Project`)
   - **PROJECT_VERSION** (Default: `"1.0.0"`): Version in metadata (Example: `PROJECT_VERSION=2.1.0`)
-  - **PERPLEXITY_API_KEY**: For research-backed features (Example: `PERPLEXITY_API_KEY=pplx-...`)
-  - **PERPLEXITY_MODEL** (Default: `"sonar-medium-online"`): Perplexity model (Example: `PERPLEXITY_MODEL=sonar-large-online`)
 
 - **Determining the Next Task**
   - Run `task-master next` to show the next task to work on

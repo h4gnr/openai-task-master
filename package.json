@@ -15,7 +15,6 @@
     "test:coverage": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
     "prepare-package": "node scripts/prepare-package.js",
     "prepublishOnly": "npm run prepare-package",
-    "prepare": "chmod +x bin/task-master.js bin/task-master-init.js",
     "changeset": "changeset",
     "release": "changeset publish"
   },
@@ -34,9 +33,8 @@
   "author": "Eyal Toledano",
   "license": "MIT",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
     "boxen": "^8.0.1",
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "cli-table3": "^0.6.5",
     "commander": "^11.1.0",
     "cors": "^2.8.5",
@@ -49,7 +47,9 @@
     "jsonwebtoken": "^9.0.2",
     "openai": "^4.89.0",
     "ora": "^8.2.0",
-    "fuse.js": "^7.0.0"
+    "fuse.js": "^7.0.0",
+    "@inquirer/prompts": "^5.1.2",
+    "axios": "^1.7.2"
   },
   "engines": {
     "node": ">=14.0.0"
