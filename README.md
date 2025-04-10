@@ -45,7 +45,7 @@ npm install openai-task-master
 
 ```bash
 # If installed globally
-task-master init
+task-master-init
 
 # If installed locally
 npx task-master-init

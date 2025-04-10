@@ -428,7 +428,6 @@ function createProjectStructure(projectName, projectDescription, projectVersion,
       "parse-prd": "node scripts/dev.js parse-prd"
     },
     dependencies: {
-      "@perplexity/perplexity-sdk": "^0.1.0",
       "axios": "^1.7.2",
       "boxen": "^8.0.1",
       "chalk": "^5.3.0",
