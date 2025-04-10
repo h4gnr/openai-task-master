@@ -1698,21 +1698,22 @@ async function analyzeTaskComplexity(options) {
     
     try {
       if (useResearch) {
-        if (!perplexity) throw new Error('Perplexity API Key not configured.');
+        log('info', 'Using --research flag: Targeting OpenRouter with configured RESEARCH_MODEL.');
         rawResponseText = await handleStreamingRequest(
-            `${prompt}\n\nLeverage your web search capabilities to provide more accurate complexity scores and justifications based on current best practices and common implementation challenges related to these tasks.`,
+            prompt, // Use the standard prompt
             "Analyze the provided tasks according to the specified JSON format.",
-            options.perplexityModel || CONFIG.perplexityModel,
+            CONFIG.researchModel, // Use the configured research model
             CONFIG.maxTokens,
             CONFIG.temperature,
-            'Perplexity',
-            perplexity
+            'OpenRouter' // Use OpenRouter service
         );
       } else {
+        // Standard OpenRouter call (uses CONFIG.model)
+        log('info', 'Using standard OpenRouter model for complexity analysis.');
         rawResponseText = await handleStreamingRequest(
             prompt,
             "Analyze the provided tasks according to the specified JSON format.",
-            options.model || process.env.OPENROUTER_MODEL || CONFIG.model,
+            options.model || process.env.OPENROUTER_MODEL || CONFIG.model, // Still allows override via --model
             CONFIG.maxTokens,
             CONFIG.temperature,
             'OpenRouter'

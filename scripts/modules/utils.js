@@ -9,7 +9,8 @@ import chalk from 'chalk';
 
 // Configuration and constants
 const CONFIG = {
-  model: process.env.MODEL || 'claude-3-7-sonnet-20250219',
+  model: process.env.OPENROUTER_MODEL || 'google/gemini-2.5-pro-exp-03-25:free',
+  researchModel: process.env.RESEARCH_MODEL || 'openrouter/quasar-alpha',
   maxTokens: parseInt(process.env.MAX_TOKENS || '4000'),
   temperature: parseFloat(process.env.TEMPERATURE || '0.7'),
   debug: process.env.DEBUG === "true",

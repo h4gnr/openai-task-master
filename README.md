@@ -67,7 +67,7 @@ After installing the package globally, you can use these CLI commands from any d
 task-master init
 
 # Parse a PRD and generate tasks
-task-master parse-prd your-prd.txt
+task-master parse-prd scripts\your-prd.txt
 
 # List all tasks
 task-master list
