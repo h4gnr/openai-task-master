@@ -46,26 +46,6 @@ import {
   validateAndFixDependencies
 } from './dependency-manager.js';
 
-// Import perplexity if available
-let perplexity;
-
-try {
-  if (process.env.PERPLEXITY_API_KEY) {
-    // Using the existing approach from ai-services.js
-    const OpenAI = (await import('openai')).default;
-    
-    perplexity = new OpenAI({
-      apiKey: process.env.PERPLEXITY_API_KEY, 
-      baseURL: 'https://api.perplexity.ai',
-    });
-    
-    log('info', `Initialized Perplexity client with OpenAI compatibility layer`);
-  }
-} catch (error) {
-  log('warn', `Failed to initialize Perplexity client: ${error.message}`);
-  log('warn', 'Research-backed features will not be available');
-}
-
 /**
  * Parse a PRD file and generate tasks
  * @param {string} prdPath - Path to the PRD file
@@ -146,18 +126,11 @@ async function parsePRD(prdPath, tasksPath, numTasks) {
  * @param {string} tasksPath - Path to the tasks.json file
  * @param {number} fromId - Task ID to start updating from
  * @param {string} prompt - Prompt with new context
- * @param {boolean} useResearch - Whether to use Perplexity AI for research
+ * @param {boolean} useResearch - Whether to use research (Perplexity)
  */
 async function updateTasks(tasksPath, fromId, prompt, useResearch = false) {
   try {
     log('info', `Updating tasks from ID ${fromId} with prompt: "${prompt}"`);
-    
-    // Validate research flag (using Perplexity)
-    if (useResearch && (!perplexity || !process.env.PERPLEXITY_API_KEY)) {
-      log('warn', 'Perplexity AI is not available. Falling back to default AI (OpenRouter).');
-      console.log(chalk.yellow('Perplexity AI is not available (API key may be missing). Falling back to default AI (OpenRouter).'));
-      useResearch = false;
-    }
     
     // Read the tasks file
     const data = readJSON(tasksPath);
@@ -212,27 +185,23 @@ ${prompt}
 
 Return only the updated tasks as a valid JSON array.`;
 
-    let updatedTasksArray;
     const loadingIndicator = startLoadingIndicator(useResearch
-      ? 'Updating tasks with Perplexity AI research...'
+      ? `Updating tasks with OpenRouter (${CONFIG.researchModel})...`
       : 'Updating tasks with OpenRouter AI...');
 
     try {
       let rawResponseText = '';
       if (useResearch) {
-        log('info', 'Using Perplexity AI for research-backed task updates');
-        const perplexityModel = process.env.PERPLEXITY_MODEL || CONFIG.perplexityModel; // Use config
-        // Use the generic streaming handler
+        log('info', `Using --research flag: Targeting OpenRouter with ${CONFIG.researchModel}`);
+        // Use the generic streaming handler with the research model
         rawResponseText = await handleStreamingRequest(
-            `${systemPrompt}\n\nAdditionally, please research the latest best practices, implementation details, and considerations when updating these tasks. Use your online search capabilities to gather relevant information.`,
+            systemPrompt, // Standard system prompt
             userPrompt,
-            perplexityModel,
+            CONFIG.researchModel, // Use configured research model
             CONFIG.maxTokens,
             CONFIG.temperature,
-            'Perplexity',
-            perplexity // Pass the client
+            'OpenRouter' // Ensure OpenRouter service is used
         );
-
       } else {
         log('info', 'Using OpenRouter AI for task updates');
         const openRouterModel = process.env.OPENROUTER_MODEL || CONFIG.model; // Use config
@@ -248,20 +217,20 @@ Return only the updated tasks as a valid JSON array.`;
       }
 
       if (!rawResponseText) {
-        throw new Error(`AI service (${useResearch ? 'Perplexity' : 'OpenRouter'}) returned an empty response.`);
+        throw new Error(`AI service (${useResearch ? 'OpenRouter' : 'OpenRouter'}) returned an empty response.`);
       }
 
       // Try parsing the JSON array directly from the response
       const jsonStart = rawResponseText.indexOf('[');
       const jsonEnd = rawResponseText.lastIndexOf(']');
       if (jsonStart === -1 || jsonEnd === -1) {
-          throw new Error(`Could not find valid JSON array in the ${useResearch ? 'Perplexity' : 'OpenRouter'} response.`);
+          throw new Error(`Could not find valid JSON array in the ${useResearch ? 'OpenRouter' : 'OpenRouter'} response.`);
       }
       const jsonText = rawResponseText.substring(jsonStart, jsonEnd + 1);
       updatedTasksArray = JSON.parse(jsonText);
 
       if (!Array.isArray(updatedTasksArray)) {
-          throw new Error(`Parsed response from ${useResearch ? 'Perplexity' : 'OpenRouter'} is not a valid array.`);
+          throw new Error(`Parsed response from ${useResearch ? 'OpenRouter' : 'OpenRouter'} is not a valid array.`);
       }
 
       if (updatedTasksArray.length !== tasksToUpdate.length) {
@@ -1148,11 +1117,12 @@ async function expandTask(taskId, numSubtasks = CONFIG.defaultSubtasks, useResea
     // Generate subtasks
     let subtasks;
     if (useResearch) {
-      log('info', 'Using Perplexity AI for research-backed subtask generation');
-      subtasks = await generateSubtasksWithPerplexity(task, numSubtasks, nextSubtaskId, additionalContext);
+      log('info', `Using --research flag: Generating subtasks with OpenRouter (${CONFIG.researchModel})`);
+      // Call standard generateSubtasks, assuming it uses configured model or handles internally
+      subtasks = await generateSubtasks(task, numSubtasks, nextSubtaskId, additionalContext, CONFIG.researchModel);
     } else {
-      log('info', 'Generating subtasks with Claude only');
-      subtasks = await generateSubtasks(task, numSubtasks, nextSubtaskId, additionalContext);
+      log('info', 'Generating subtasks with standard OpenRouter model');
+      subtasks = await generateSubtasks(task, numSubtasks, nextSubtaskId, additionalContext, CONFIG.model);
     }
     
     // Add the subtasks to the task
@@ -1367,11 +1337,11 @@ async function expandAllTasks(numSubtasks = CONFIG.defaultSubtasks, useResearch 
         
         // Generate subtasks
         let subtasks;
-        if (useResearch) {
-          subtasks = await generateSubtasksWithPerplexity(task, taskSubtasks, nextSubtaskId, taskContext);
-        } else {
-          subtasks = await generateSubtasks(task, taskSubtasks, nextSubtaskId, taskContext);
-        }
+        const modelToUse = useResearch ? CONFIG.researchModel : CONFIG.model;
+        const logModel = useResearch ? `OpenRouter (${CONFIG.researchModel})` : `standard OpenRouter model (${CONFIG.model})`;
+        
+        log('info', `Generating subtasks for task ${task.id} using ${logModel}`);
+        subtasks = await generateSubtasks(task, taskSubtasks, nextSubtaskId, taskContext, modelToUse);
         
         // Add the subtasks to the task
         task.subtasks = [...task.subtasks, ...subtasks];
