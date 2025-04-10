@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Describes the high-level architecture of the Task Master CLI application.
 globs: scripts/modules/*.js
 alwaysApply: false
