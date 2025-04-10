@@ -1,6 +1,6 @@
 # Task Master
 
-### by [@eyaltoledano](https://x.com/eyaltoledano)
+### forked from [@eyaltoledano](https://x.com/eyaltoledano)
 
 A task management system for AI-driven development, designed to work seamlessly with Cursor AI. It now uses OpenRouter to access various AI models.
 
@@ -35,10 +35,10 @@ The script can be configured through environment variables in a `.env` file at t
 
 ```bash
 # Install globally
-npm install -g task-master-ai
+npm install -g https://github.com/h4gnr/openai-task-master.git
 
 # OR install locally within your project
-npm install task-master-ai
+npm install openai-task-master
 ```
 
 ### Initialize a new project
@@ -86,7 +86,7 @@ task-master generate
 Try running it with Node directly:
 
 ```bash
-node node_modules/claude-task-master/scripts/init.js
+node node_modules/openai-task-master/scripts/init.js
 ```
 
 Or clone the repository and run:
@@ -115,7 +115,7 @@ Tasks in tasks.json have the following structure:
 
 ## Integrating with Cursor AI
 
-Claude Task Master is designed to work seamlessly with [Cursor AI](https://www.cursor.so/), providing a structured workflow for AI-driven development.
+openai-task-master is designed to work seamlessly with [Cursor AI](https://www.cursor.so/), providing a structured workflow for AI-driven development.
 
 ### Setup with Cursor
 
@@ -570,7 +570,7 @@ The `show` command:
 ### Starting a new project
 
 ```
-I've just initialized a new project with Claude Task Master. I have a PRD at scripts/prd.txt.
+I've just initialized a new project with openai-task-master. I have a PRD at scripts/prd.txt.
 Can you help me parse it and set up the initial tasks?
 ```
 

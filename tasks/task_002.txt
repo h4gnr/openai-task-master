@@ -1,16 +1,11 @@
 # Task ID: 2
-# Title: Develop Command Line Interface Foundation
-# Status: done
+# Title: Implement User Authentication and RBAC
+# Status: pending
 # Dependencies: 1
 # Priority: high
-# Description: Create the basic CLI structure using Commander.js with command parsing and help documentation.
+# Description: Implement secure user login/logout functionality and Role-Based Access Control (RBAC) to restrict access based on user roles.
 # Details:
-Implement the CLI foundation including:
-- Set up Commander.js for command parsing
-- Create help documentation for all commands
-- Implement colorized console output for better readability
-- Add logging system with configurable levels
-- Handle global options (--help, --version, --file, --quiet, --debug, --json)
+Implement user registration (admin-only initially) and login using secure methods (e.g., JWT, password hashing). Define initial roles (Principal, Financial/Legal, Pedagogical Coordinator, Admin Assistant) based on personas (FR04). Implement middleware to protect API endpoints based on roles. Store user data securely (NFR01).
 
 # Test Strategy:
-Test each command with various parameters to ensure proper parsing. Verify help documentation is comprehensive and accurate. Test logging at different verbosity levels.
+Unit tests for authentication logic. Integration tests for login/logout flow. Test endpoint access control for different defined roles. Verify password hashing and secure token handling.

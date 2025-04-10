@@ -35,10 +35,10 @@ The script can be configured through environment variables in a `.env` file at t
 
 ```bash
 # Install globally
-npm install -g task-master-ai
+npm install -g openai-task-master
 
 # OR install locally within your project
-npm install task-master-ai
+npm install openai-task-master
 ```
 
 ### Initialize a new project
@@ -134,7 +134,7 @@ To enable enhanced task management capabilities directly within Cursor using the
 4. Configure with the following details:
    - Name: "Task Master"
    - Type: "Command"
-   - Command: "npx -y --package task-master-ai task-master-mcp"
+   - Command: "npx -y --package openai-task-master task-master-mcp"
 5. Save the settings
 
 Once configured, you can interact with Task Master's task management commands directly through Cursor's interface, providing a more integrated experience.
@@ -630,4 +630,25 @@ Can you analyze the complexity of our tasks to help me understand which ones nee
 
 ```
 Can you show me the complexity report in a more readable format?
+```
+
+## MCP Server
+
+An optional server component (`mcp-server`) is included to facilitate communication between different parts of your development environment or potentially other tools. It uses the `fastmcp` library.
+
+### Starting the MCP Server
+
+From your project root:
+
+```bash
+# If installed globally or locally and bin-links are set up
+# Make sure the server is executable: chmod +x mcp-server/server.js
+task-master-mcp-server
+
+# Alternatively, run with npx (downloads/runs the package)
+# Ensure you use the correct package name if you installed a fork
+npx -y --package openai-task-master task-master-mcp-server
+
+# Or run directly with Node
+node mcp-server/server.js
 ```

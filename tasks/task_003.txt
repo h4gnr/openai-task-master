@@ -1,18 +1,11 @@
 # Task ID: 3
-# Title: Implement Basic Task Operations
-# Status: done
+# Title: Implement LLM Interface Layer - Ollama Support
+# Status: pending
 # Dependencies: 1
 # Priority: high
-# Description: Create core functionality for managing tasks including listing, creating, updating, and deleting tasks.
+# Description: Develop the backend interface to connect with LLMs via Ollama, allowing local model usage.
 # Details:
-Implement the following task operations:
-- List tasks with filtering options
-- Create new tasks with required fields
-- Update existing task properties
-- Delete tasks
-- Change task status (pending/done/deferred)
-- Handle dependencies between tasks
-- Manage task priorities
+Create a service/module within the backend to handle LLM interactions through mcp-agent. Implement logic to connect to a specified Ollama instance (server address, model name) (FR06c). Securely manage Ollama configuration details (e.g., via environment variables or a secure config store) (FR08).
 
 # Test Strategy:
-Test each operation with valid and invalid inputs. Verify that dependencies are properly tracked and that status changes are reflected correctly in the tasks.json file.
+Unit tests for the Ollama connection module. Integration test: Send a simple prompt to a running Ollama instance via the implemented interface and verify response. Test error handling for connection failures.

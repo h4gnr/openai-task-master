@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-console.log('Starting task-master-ai...');
+console.log('Starting openai-task-master...');
 
 import fs from 'fs';
 import path from 'path';

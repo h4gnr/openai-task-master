@@ -1,7 +1,7 @@
 {
-  "name": "task-master-ai",
-  "version": "0.9.30",
-  "description": "A task management system for ambitious AI-driven development that doesn't overwhelm and confuse Cursor.",
+  "name": "openai-task-master",
+  "version": "0.1.00",
+  "description": "A task management system for ambitious AI-driven development that doesn't overwhelm and confuse Cursor and uses OpenAI style API keys instead of Anthropic's.",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -19,18 +19,18 @@
     "release": "changeset publish"
   },
   "keywords": [
-    "claude",
+    "openrouter",
     "task",
     "management",
     "ai",
     "development",
     "cursor",
-    "anthropic",
+    "openai",
     "llm",
     "mcp",
     "context"
   ],
-  "author": "Eyal Toledano",
+  "author": "h4gnr (forked from Eyal Toledano)",
   "license": "MIT",
   "dependencies": {
     "boxen": "^8.0.1",
@@ -56,11 +56,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eyaltoledano/claude-task-master.git"
+    "url": "git+https://github.com/h4gnr/openai-task-master.git"
   },
-  "homepage": "https://github.com/eyaltoledano/claude-task-master#readme",
+  "homepage": "https://github.com/h4gnr/openai-task-master#readme",
   "bugs": {
-    "url": "https://github.com/eyaltoledano/claude-task-master/issues"
+    "url": "https://github.com/h4gnr/openai-task-master/issues"
   },
   "files": [
     "scripts/init.js",
