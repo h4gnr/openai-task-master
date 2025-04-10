@@ -1743,7 +1743,8 @@ async function analyzeTaskComplexity(options) {
     
   } catch (error) {
     if (streamingInterval) clearInterval(streamingInterval);
-    stopLoadingIndicator(loadingIndicator);
+    // Check if loadingIndicator was assigned before trying to stop it
+    if (loadingIndicator) stopLoadingIndicator(loadingIndicator);
     throw error;
   }
 }
