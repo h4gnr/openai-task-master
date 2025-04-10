@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for implementing utility functions
 globs: scripts/modules/utils.js
 alwaysApply: false

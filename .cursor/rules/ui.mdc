@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for implementing and maintaining user interface components
 globs: scripts/modules/ui.js
 alwaysApply: false

@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for managing task dependencies and relationships
 globs: scripts/modules/dependency-manager.js
 alwaysApply: false

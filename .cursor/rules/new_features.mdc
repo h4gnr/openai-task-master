@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for integrating new features into the Task Master CLI
 globs: scripts/modules/*.js
 alwaysApply: false

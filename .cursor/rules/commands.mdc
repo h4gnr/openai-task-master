@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for implementing CLI commands using Commander.js
 globs: scripts/modules/commands.js
 alwaysApply: false

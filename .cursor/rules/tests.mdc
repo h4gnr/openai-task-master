@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for implementing and maintaining tests for Task Master CLI
 globs: "**/*.test.js,tests/**/*"
 ---

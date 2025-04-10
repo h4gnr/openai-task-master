@@ -1,4 +1,9 @@
 ---
+description: 
+globs: 
+alwaysApply: false
+---
+---
 description: Guidelines for implementing task management operations
 globs: scripts/modules/task-manager.js
 alwaysApply: false
